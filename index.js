@@ -7,14 +7,20 @@ botao.addEventListener('click', (e)=>{
     
     const cep = campoCep.value.replace('-', '');
     const paragrafo = document.createElement('p');
+    paragrafo.classList.add('erro-cep')
     paragrafo.textContent = 'Parece que o cep é invalido.';
 
     if(cep != '' && cep.length == 8){
         buscarCep(cep);
         campoCep.value = '';
-    }else{
-        container.appendChild(paragrafo);
-        return;
+    }else{        
+        const paragrafoExiste = container.querySelector('.erro-cep');
+        if(paragrafoExiste){
+            container.removeChild(paragrafoExiste);
+            container.appendChild(paragrafo);
+        }else{
+            container.appendChild(paragrafo);
+        }
     }
 });
 

@@ -37,17 +37,17 @@ main {
 }
 .container .resultado {
   color: white;
-  position: absolute;
+  position: fixed;
   background-color: #2B3467;
   padding-bottom: 1rem;
   animation: surgindo 1s;
 }
 @keyframes surgindo {
   0% {
-    transform: translateX(-9999px);
+    transform: translateY(9999px);
   }
   100% {
-    transform: translateX(0px);
+    transform: translateY(0px);
   }
 }
 .container .resultado ul {
@@ -72,14 +72,15 @@ main {
 }
 .container .saindo {
   animation: saindo 1s;
-  transform: translateX(-9999px);
+  transform: translateY(9999px);
+  position: fixed;
 }
 @keyframes saindo {
   0% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   100% {
-    transform: translateX(-999px);
+    transform: translateY(9999px);
   }
 }
 .container h1, .container .resultado h1 {

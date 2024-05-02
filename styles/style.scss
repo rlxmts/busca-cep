@@ -40,6 +40,7 @@ main{
     justify-content: center;
     
     .resultado{
+        z-index: 9999;
         @extend .container;
         color: white;
         position: fixed;
@@ -138,8 +139,28 @@ main{
     }
 }
 
+.loading{
+    border: 5px solid $azul-escuro;
+    height: 0px;
+    width: 0px;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    border-top: 5px solid transparent;
+    animation: girar 1s linear infinite;
+    transition: .6s;
+    @keyframes girar {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }          
+}
 
-
+.loading-ativo{
+    height: 50px;
+    width: 50px;
+    opacity: 1;
+}
 
 
 

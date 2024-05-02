@@ -1,20 +1,23 @@
 const botao = document.querySelector('[data-botao]');
 const container = document.querySelector('.container');
 const campoCep = document.querySelector('[data-campo-cep]');
+const loading = document.querySelector('.loading');
 
 botao.addEventListener('click', (e)=>{
     e.preventDefault();
-    
     const cep = campoCep.value.replace('-', '');
     const paragrafo = document.createElement('p');
     paragrafo.classList.add('erro-cep')
     paragrafo.textContent = 'Parece que o cep é invalido.';
     const paragrafoExiste = container.querySelector('.erro-cep');
-
+    
     if(cep != '' && cep.length == 8){
+        loading.classList.add('loading-ativo');
         buscarCep(cep);
         campoCep.value = '';
-        container.removeChild(paragrafoExiste);
+        if(paragrafoExiste){
+            container.removeChild(paragrafoExiste);
+        }
     }else{        
         if(paragrafoExiste){
             container.removeChild(paragrafoExiste);
@@ -30,7 +33,6 @@ async function buscarCep(cep){
         const api = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         const apiConvertida = await api.json();         
         criarCard(apiConvertida.logradouro, apiConvertida.bairro, apiConvertida.localidade, apiConvertida.ddd, apiConvertida.uf);
-
     }catch(error){
         container.innerHTML += `<p>Parece que houve um erro:${error}.</p>`
     }
@@ -61,5 +63,6 @@ function criarCard(rua, bairro, cidade, ddd, uf){
 
 function removerResultado(elemento){
     elemento.classList.toggle('saindo');
+    loading.classList.remove('loading-ativo');
 }
 

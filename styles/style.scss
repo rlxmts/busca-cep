@@ -44,7 +44,7 @@ main{
         color: white;
         position: absolute;
         background-color: $azul-escuro;
-
+        padding-bottom: 1rem;
         ul{
             padding: 2rem 1rem;
             @include flex-gap(1rem);

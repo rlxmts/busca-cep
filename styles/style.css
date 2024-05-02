@@ -39,6 +39,7 @@ main {
   color: white;
   position: absolute;
   background-color: #2B3467;
+  padding-bottom: 1rem;
 }
 .container .resultado ul {
   padding: 2rem 1rem;

@@ -1,30 +1,27 @@
 const botao = document.querySelector('[data-botao]');
 const container = document.querySelector('.container');
-
+const campoCep = document.querySelector('[data-campo-cep]');
 
 botao.addEventListener('click', (e)=>{
-
+    e.preventDefault();
+    
+    const cep = campoCep.value.replace('-', '');
     const paragrafo = document.createElement('p');
     paragrafo.textContent = 'Parece que o cep é invalido.';
 
-    e.preventDefault();
-    const campoCep = document.querySelector('[data-campo-cep]').value;
-    const cep = campoCep.replace('-', '');
-
     if(cep != '' && cep.length == 8){
         buscarCep(cep);
+        campoCep.value = '';
     }else{
         container.appendChild(paragrafo);
         return;
     }
-
 });
 
 async function buscarCep(cep){
     try{
         const api = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-        const apiConvertida = await api.json();  
-        
+        const apiConvertida = await api.json();         
         criarCard(apiConvertida.logradouro, apiConvertida.bairro, apiConvertida.localidade, apiConvertida.ddd, apiConvertida.uf);
 
     }catch(error){
@@ -38,6 +35,10 @@ function criarCard(rua, bairro, cidade, ddd, uf){
     const ul = document.createElement('ul');
     const botao = document.createElement('button');
     botao.textContent = 'Fazer nova busca';
+    botao.classList.add('botao-fechar-resultado');
+    
+    botao.onclick = ()=> removerResultado(div);
+
     ul.innerHTML = `
         <h3>Informações:</h3>
         <li class="item-resultado">Rua: ${rua}</li>
@@ -49,5 +50,9 @@ function criarCard(rua, bairro, cidade, ddd, uf){
     div.appendChild(ul);
     div.appendChild(botao)
     container.appendChild(div);
+}
+
+function removerResultado(elemento){
+    container.removeChild(elemento);
 }
 

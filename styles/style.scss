@@ -45,6 +45,16 @@ main{
         position: absolute;
         background-color: $azul-escuro;
         padding-bottom: 1rem;
+        animation: surgindo 1s;    
+        @keyframes surgindo {
+            0%{
+                transform: translateX(-9999px);
+            } 
+            100%{
+                transform: translateX(0px);
+            }   
+        }
+
         ul{
             padding: 2rem 1rem;
             @include flex-gap(1rem);
@@ -64,6 +74,18 @@ main{
                 background-color: #BAD7E9;
             }
         }
+    }
+    .saindo{
+        animation: saindo 1s;
+        @keyframes saindo {
+            0%{
+                transform: translateX(0);
+            } 
+            100%{
+                transform: translateX(-999px);
+            }   
+        }
+        transform: translateX(-9999px);
     }
 
     h1{
@@ -99,3 +121,10 @@ main{
         }
     }
 }
+
+
+
+
+
+
+

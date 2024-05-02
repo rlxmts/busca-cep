@@ -53,6 +53,6 @@ function criarCard(rua, bairro, cidade, ddd, uf){
 }
 
 function removerResultado(elemento){
-    container.removeChild(elemento);
+    elemento.classList.toggle('saindo');
 }
 
